@@ -1,0 +1,43 @@
+/* Git Notes
+git add . (adds any changes made to the files to the staging area, "." add all files, or you could list the file names without commas)
+git commit -m "notes about change* (commits any changes waiting in the staging file to the master)
+git push heroku master (not sure what this does, might be a restart, or might be the command to push the changes to the heroku server files, not sure how Heroku manages application files.)
+git status (will tell you if there are any changes in the staging file ready to push)
+git diff (will show you the changes that are different between the working file and the staging file)
+git log (will show you all of the actions, log file)
+git init (initializes a folder for Git operations/functionality)
+git checkout HEAD filename (restore or undo most recent commit to the working directory)
+git checkout HEAD (view most recent commit)
+git reset HEAD filename (will remove the "filename" from the staging area. Imagine having serveral files to commit in the staging area, but you realize one has a mistake, and you want to pull it back)
+git reset <first seven characters of the commit SHA> (allows you to rewind your project to a previous commit)
+
+git branch (Lists all a Git project’s branches.)
+git branch branch_name (Creates a new branch.)
+git checkout branch_name (Used to switch from one branch to another.)
+git merge branch_name (Used to join file changes from one branch to another.)
+git branch -d branch_name  (Deletes the branch specified.)
+
+git fetch (will copy down any new changes in the remote project on Github down locally to the remote branch, the origin/master branch.)
+git clone (Creates a local copy of a remote.)
+git remote -v (Lists a Git project’s remotes.)
+git merge origin/master (Merges origin/master into your local branch.)
+git push origin <branch_name> (Pushes a local branch to the origin remote.)
+git pull origin main (Pulls changes made in git hub repository down to the local copy)
+
+***create a new repository on the command line***
+echo "# excursion" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/gsipes00/excursion.git
+git push -u origin main
+
+***push an existing repository from the command line***
+git remote add origin https://github.com/gsipes00/excursion.git
+git branch -M main
+git push -u origin main
+
+***or import code from another repository***
+You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
+*/
