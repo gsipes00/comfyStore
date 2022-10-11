@@ -15,12 +15,18 @@ const getElement = (selection) => {
   throw new Error(`Please check "${selection}" selector, no such element exist`)
 }
 
-const formatPrice = () => {}
+const formatPrice = (price) => {
+  let formattedPrice = new Intl.NumberFormat('en-US',{
+    style:'currency',
+    currency: "USD"
+  }).format((price/100).toFixed(2))
+  return formattedPrice
+}
 
 const getStorageItem = (item) => {
   let storageItem = localStorage.getItem(item)
   if(storageItem){
-    // local storage only stores as text, needt to parse back to json for use in javascript
+    // local storage only stores as text, need to parse back to json for use in javascript
     storageItem = JSON.parse(localStorage.getItem(item)) 
   } else {
     storageItem = []
@@ -29,6 +35,7 @@ const getStorageItem = (item) => {
 }
 // sets the items to the local storage
 const setStorageItem = (name, item) => {
+  // convert the item to text for storage in local storge using strigify
   localStorage.setItem(name,JSON.stringify(item))
 }
 
