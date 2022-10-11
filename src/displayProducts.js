@@ -11,12 +11,11 @@ const display = (products, element) => {
             class="product-img img"
             alt=""
           />
-          
           <div class="product-icons">
             <a href="product.html?id=${id}" class="product-icon">
               <i class="fas fa-search"></i>
             </a>
-            <button class="product-cart-btn product-icon" data-id="1">
+            <button class="product-cart-btn product-icon" data-id=${id}>
               <i class="fas fa-shopping-cart"></i>
             </button>
           </div>
