@@ -1,6 +1,6 @@
 import { getStorageItem, setStorageItem } from "./utils.js";
 
-let store = getStorageItem('store');
+let store = getStorageItem("store");
 // store function
 const setupStore = (products) => {
   store = products.map((product) => {
@@ -11,7 +11,7 @@ const setupStore = (products) => {
     const image = img[0].thumbnails.large.url;
     return { id, featured, name, price, company, colors, image };
   });
-  setStorageItem('store', store)
+  setStorageItem("store", store);
 };
 
 console.log(store);
