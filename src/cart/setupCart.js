@@ -9,7 +9,7 @@ import { openCart } from "./toggleCart.js";
 import { findProduct } from "../store.js";
 import addToCartDOM from "./addToCartDOM.js";
 // set items
-const cartItemCountDOM = getElement(".cart-item-count");
+const cartItemCountDom = getElement(".cart-item-count");
 const cartItemsDom = getElement(".cart-items");
 const cartTotalDom = getElement(".cart-total");
 
@@ -41,7 +41,8 @@ function displayCartItemCount() {
   const amount = cart.reduce((total, cartItem) => {
     return (total += cartItem.amount);
   }, 0);
-  cartItemCountDOM.textContent = amount;
+  cartItemCountDom.textContent = amount;
+  console.log(`amount is ${amount}`);
 }
 function displayCartTotal() {
   let total = cart.reduce((total, cartItem) => {
@@ -50,7 +51,21 @@ function displayCartTotal() {
   cartTotalDom.textContent = `total : ${formatPrice(total)}`;
 }
 
+function displayCartItemsDOM() {
+  cart.forEach((cartItem) => {
+    addToCartDOM(cartItem);
+  });
+}
+function setupCartFuncionality() {}
+
 const init = () => {
-  console.log(cart);
+  // display amount of cart items
+  displayCartItemCount();
+  // display total
+  displayCartTotal();
+  // add all cart items to the dom
+  displayCartItemsDOM();
+  // setup cart functionality
+  setupCartFuncionality();
 };
 init();
