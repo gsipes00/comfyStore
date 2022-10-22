@@ -25,51 +25,44 @@ let productID;
 window.addEventListener("DOMContentLoaded", async function () {
   // search returns the query strings from the selected page
   const urlID = window.location.search;
-  try{
+  try {
     const response = await fetch(`${singleProductUrl}${urlID}`);
-    console.log(response)
-    if(response.status >= 200 && response.status <= 299){
-      const product = await response.json()
+    console.log(response);
+    if (response.status >= 200 && response.status <= 299) {
+      const product = await response.json();
       // destructure data from response
-      const {id, fields } = product
+      const { id, fields } = product;
       productID = id;
-      const {name, company, price, colors, description} = fields;
-      const image = fields.image[0].thumbnails.large.url
+      const { name, company, price, colors, description } = fields;
+      const image = fields.image[0].thumbnails.large.url;
       // set values
-      document.title = `${name.toUpperCase()} | Comfy`
+      document.title = `${name.toUpperCase()} | Comfy`;
       pageTitleDOM.textContent = `Home / ${name}`;
       imgDOM.src = image;
-      titleDOM.textContent = name
-      companyDOM.textContent = `by ${company}`
-      priceDOM.textContent = formatPrice(price)
-      descDOM.textContent = description
-      colors.forEach((color)=>{
-        const span = document.createElement('span');
-        span.classList.add('product-color')
-        span.style.backgroundColor = `${color}`
-        colorsDOM.appendChild(span)
-      })
-
-
-
-
-
-
+      titleDOM.textContent = name;
+      companyDOM.textContent = `by ${company}`;
+      priceDOM.textContent = formatPrice(price);
+      descDOM.textContent = description;
+      colors.forEach((color) => {
+        const span = document.createElement("span");
+        span.classList.add("product-color");
+        span.style.backgroundColor = `${color}`;
+        colorsDOM.appendChild(span);
+      });
     } else {
-      console.log(response.status, response.statusText)
+      console.log(response.status, response.statusText);
       centerDOM.innerHTML = `<div>
       <h3 class="error">sorry, something went wrong<h3>
       <a href="index.html" class="btn">back home</a>
-      </div>`
+      </div>`;
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-    
 
   loading.style.display = "none";
 });
 
-cartBtn.addEventListener('click', function(){
-  addToCart(productID)
-})
+cartBtn.addEventListener("click", function () {
+  addToCart(productID);
+});
