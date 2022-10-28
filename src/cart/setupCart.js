@@ -27,6 +27,12 @@ export const addToCart = (id) => {
     addToCartDOM(product);
   } else {
     // update values
+    const amount = increaseAmount(id);
+    // use spread operator to turn node list to an array
+    const items = [...cartItemsDom.querySelectorAll(".cart-item-amount")];
+    console.log(items);
+    const newAmount = items.find((value) => value.dataset.id === id);
+    newAmount.textContent = amount;
   }
   // add one to the item count
   displayCartItemCount();
@@ -55,6 +61,18 @@ function displayCartItemsDOM() {
   cart.forEach((cartItem) => {
     addToCartDOM(cartItem);
   });
+}
+// update data and dom for item counts
+function increaseAmount(id) {
+  let newAmount;
+  cart = cart.map((cartItem) => {
+    if (cartItem.id === id) {
+      newAmount = cartItem.amount + 1;
+      cartItem = { ...cartItem, amount: newAmount };
+    }
+    return cartItem;
+  });
+  return newAmount;
 }
 function setupCartFuncionality() {}
 
