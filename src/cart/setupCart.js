@@ -62,7 +62,11 @@ function displayCartItemsDOM() {
     addToCartDOM(cartItem);
   });
 }
-// update data and dom for item counts
+// remove items from cart
+function removeItem(id) {
+  cart = cart.filter((cartItem) => cartItem.id !== id);
+}
+// update data and dom for item increase counts (note this could be a single function for increase and decrease)
 function increaseAmount(id) {
   let newAmount;
   cart = cart.map((cartItem) => {
@@ -74,7 +78,55 @@ function increaseAmount(id) {
   });
   return newAmount;
 }
-function setupCartFuncionality() {}
+// update data and dom for item increase counts (note this could be a single function for increase and decrease)
+function decreaseAmount(id) {
+  let newAmount;
+  cart = cart.map((cartItem) => {
+    if (cartItem.id === id) {
+      newAmount = cartItem.amount - 1;
+      cartItem = { ...cartItem, amount: newAmount };
+    }
+    return cartItem;
+  });
+  return newAmount;
+}
+// cart decrease and increase amounts
+function setupCartFuncionality() {
+  cartItemsDom.addEventListener("click", function (e) {
+    // the remove button element
+    const element = e.target;
+    // the remove button parent div
+    const parent = e.target.parentElement;
+    const elementID = e.target.dataset.id;
+    const parentID = e.target.parentElement.dataset.id;
+    // remove
+    if (element.classList.contains("cart-item-remove-btn")) {
+      removeItem(elementID);
+      parent.parentElement.remove();
+      // jumped straight to parent above instead of this
+      // element.parentElement.parentElement.remove()
+    }
+    // increase
+    if (parent.classList.contains("cart-item-increase-btn")) {
+      const newAmount = increaseAmount(parentID);
+      parent.nextElementSibling.textContent = newAmount;
+    }
+    // decrease
+    if (parent.classList.contains("cart-item-decrease-btn")) {
+      const newAmount = decreaseAmount(parentID);
+      if (newAmount === 0) {
+        removeItem(parentID);
+        parent.parentElement.parentElement.remove();
+      } else {
+        parent.previousElementSibling.textContent = newAmount;
+      }
+    }
+    // three functions that run regardless of action
+    displayCartItemCount();
+    displayCartTotal();
+    setStorageItem("cart", cart);
+  });
+}
 
 const init = () => {
   // display amount of cart items
